@@ -39,7 +39,7 @@ bool remove(Node* head, int value){
     }else if(contain(head, value)){
         Node* markedNode = head->next;
         Node* lastNode = head;
-        while(markedNode->next){
+        while(markedNode){
             if(markedNode->data == value){
                 break;
             }
@@ -57,7 +57,7 @@ bool remove(Node* head, int value){
 
 void traverse(Node* head){
     Node* ptr = head;
-    while(ptr->next){
+    while(ptr){
         std::cout << ptr->data << std::endl;
         ptr = ptr->next;
     }
