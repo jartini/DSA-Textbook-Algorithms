@@ -39,7 +39,7 @@ bool remove(Node* head, int value){
     }else if(contain(head, value)){
         Node* markedNode = head->next;
         Node* lastNode = head;
-        while(markedNode){
+        while(markedNode->next){
             if(markedNode->data == value){
                 break;
             }
