@@ -56,11 +56,27 @@ bool remove(Node* head, int value){
 }
 
 void traverse(Node* head){
-
+    Node* ptr = head;
+    while(ptr->next){
+        std::cout << ptr->data << std::endl;
+        ptr = ptr->next;
+    }
 }
 
-void rtraverse(Node* head){
-    
+void rtraverse(Node* head, Node* tail){
+    auto getNextLastPtr = [] (Node* head, Node* last){
+        Node* ptr = head;
+        while(ptr->next != last){
+            ptr = ptr->next;
+        }
+        return ptr;
+    };
+    Node* ptr = tail;
+    while(ptr != head){
+        std::cout << ptr->data << std::endl;
+        ptr = getNextLastPtr(head, ptr);
+    }
+    std::cout << ptr->data << std::endl;
 }
 
 int main(){return 0;}
