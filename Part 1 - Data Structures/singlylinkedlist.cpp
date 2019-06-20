@@ -55,4 +55,12 @@ bool remove(Node* head, int value){
     }
 }
 
+void traverse(Node* head){
+
+}
+
+void rtraverse(Node* head){
+    
+}
+
 int main(){return 0;}
