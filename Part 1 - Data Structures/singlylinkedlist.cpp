@@ -8,16 +8,17 @@ struct Node
 
 Node* getTailPtr(Node* head){
     Node* ptr = head;
-    while(ptr->next){
+    while(ptr->next != nullptr){
         ptr=ptr->next;
     }
     return ptr;
 }
 
 void insert(Node* head, int data){
-    Node* nextTail;
+    Node* nextTail = new Node;
     nextTail->data=data;
-    getTailPtr(head)->next=nextTail;
+    getTailPtr(head)->next = nextTail;
+    std::cout << getTailPtr(head) << std::endl;
 }
 
 bool contain(Node* head, int query){
@@ -79,4 +80,15 @@ void rtraverse(Node* head, Node* tail){
     std::cout << ptr->data << std::endl;
 }
 
-int main(){return 0;}
+int main(){
+    Node* head = new Node;    
+    head->data = 69;
+    for(int i = 0; i <= 20; i++){
+        insert(head, i);
+    }
+    traverse(head);
+    rtraverse(head, getTailPtr(head));
+    remove(head, 5);
+    traverse(head);
+    return 0;
+}
