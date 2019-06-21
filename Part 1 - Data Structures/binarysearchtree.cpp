@@ -74,6 +74,8 @@ bool remove(Node* root, int value){
     }else if(root->key == value){
         root = supTree;
         return true;
+    }else{
+        return false;
     }
     delete node;
     return true;
