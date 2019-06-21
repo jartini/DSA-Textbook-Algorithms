@@ -35,6 +35,28 @@ void insertNode(Node* root, int data){
     }
 }
 
+bool contain(Node* root, int query){
+    Node* ptr = root;
+    if(ptr->key == query){
+        return true;
+    }
+    if(ptr->key < query){ //left
+        if(ptr->lPtr == nullptr){
+            return false;
+        }else{
+            ptr = ptr->lPtr;
+            contain(ptr, query);
+        }
+    }else if(ptr->key > query){ //right
+        if(ptr->rPtr == nullptr){
+            return false;
+        }else{
+            ptr = ptr->rPtr;
+            contain(ptr, query);
+        }
+    }
+}
+
 
 
 
