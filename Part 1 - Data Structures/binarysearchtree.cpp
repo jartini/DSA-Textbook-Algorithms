@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 struct Node {
     Node* lPtr = nullptr;
     Node* rPtr = nullptr;
@@ -12,6 +11,7 @@ struct Node {
 //void insert(int value){}
 
 void insertNode(Node* root, int data){
+    //inserts a node
     //recursive
     Node* ptr = root;
     if(data < ptr->key){ //left
@@ -36,6 +36,7 @@ void insertNode(Node* root, int data){
 }
 
 bool contain(Node* root, int query){
+    //searches the tree for an existing node with the corresponding key
     Node* ptr = root;
     if(ptr->key == query){
         return true;
@@ -58,6 +59,8 @@ bool contain(Node* root, int query){
 }
 
 bool remove(Node* root, int value){
+    //absolute shit show
+    //removes a node and restructures the tree
     if (!contain(root, value)){
         return false;
     }
@@ -82,6 +85,7 @@ bool remove(Node* root, int value){
 }
 
 Node* findParentNode(Node* root, int value, Node* parent = nullptr){
+    //returns the parent pointer of the node that contains the value
     Node* ptr = root;
     if(!contains(root, value)){ //contains?
         return nullptr;
@@ -100,6 +104,7 @@ Node* findParentNode(Node* root, int value, Node* parent = nullptr){
 }
 
 Node* findNode(Node* root, int value){
+    //returns pointer to the node that contains the value
     Node* ptr = root;
     if(!contains(root, value)){ //contains?
         return nullptr;
@@ -116,10 +121,12 @@ Node* findNode(Node* root, int value){
 }
 
 int findMin(Node* node){
+    //returns smallest value
     return findMinNode(node)->key;
 }
 
 Node* findMinNode(Node* node){
+    //returns pointer of min node
     Node* ptr = node;
     if(!ptr->lPtr){
         return ptr;
@@ -130,10 +137,12 @@ Node* findMinNode(Node* node){
 }
 
 int findMax(Node* node){
+    //returns biggest value
     return findMaxNode(node)->key;
 }
 
 Node* findMaxNode(Node* node){
+    //returns pointer of max node
     Node* ptr = node;
     if(!ptr->rPtr){
         return ptr;
@@ -141,6 +150,20 @@ Node* findMaxNode(Node* node){
         ptr = ptr->rPtr;
         return findMaxNode(ptr);
     }
+}
+
+//TRAVERSALS
+
+void preorder(Node* root){
+
+}
+
+void postorder(Node* root){
+
+}
+
+void inorder(Node* root){
+
 }
 
 int main(){return 0;}
