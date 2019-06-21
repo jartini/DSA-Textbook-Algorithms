@@ -66,7 +66,22 @@ bool remove(Node* root, int value){
 }
 
 Node* findParentNode(Node* root, int value){
-
+    Node* ptr = root;
+    Node* parent = nullptr;
+    if(!contains(root, value)){
+        return nullptr;
+    }
+    if(ptr->key < value{
+        parent = ptr;
+        ptr = ptr->lPtr;
+        return findParentNode(ptr, value);
+    }else if(ptr->key > value){
+        parent = ptr;
+        ptr = ptr->rPtr;
+        return findParentNode(ptr, value);
+    }else if(ptr->key == value){
+        return parent;
+    }
 }
 
 Node* findNode(Node* root, int value){
@@ -78,13 +93,7 @@ int findMin(Node* root){
 }
 
 int findMax(Node* root){
-    
+
 }
-
-
-
-
-
-
 
 int main(){return 0;}
