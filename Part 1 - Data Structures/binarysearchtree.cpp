@@ -60,40 +60,85 @@ bool contain(Node* root, int query){
 bool remove(Node* root, int value){
     if (!contain(root, value)){
         return false;
-    }else{
-        
     }
+    Node* parent = findParentNode(root, value);
+    Node* node = findNode(root, value);
+    Node* infTree = node->lPtr;
+    Node* supTree = node->rPtr;
+    Node* infParent = findMinNode(supTree);
+    infParent->lPtr = infTree;
+    if(parent->lPtr == node){
+        parent->lPtr = supTree;
+    }else if(parent->rPtr == node){
+        parent->rPtr = supTree;
+    }else if(root->key == value){
+        root = supTree;
+        return true;
+    }
+    delete node;
+    return true;
 }
 
-Node* findParentNode(Node* root, int value){
+Node* findParentNode(Node* root, int value, Node* parent = nullptr){
     Node* ptr = root;
-    Node* parent = nullptr;
-    if(!contains(root, value)){
+    if(!contains(root, value)){ //contains?
         return nullptr;
     }
-    if(ptr->key < value{
+    if(ptr->key < value){//left
         parent = ptr;
         ptr = ptr->lPtr;
-        return findParentNode(ptr, value);
-    }else if(ptr->key > value){
+        return findParentNode(ptr, value, parent);
+    }else if(ptr->key > value){ //right
         parent = ptr;
         ptr = ptr->rPtr;
-        return findParentNode(ptr, value);
-    }else if(ptr->key == value){
+        return findParentNode(ptr, value, parent);
+    }else if(ptr->key == value){ //found parent
         return parent;
     }
 }
 
 Node* findNode(Node* root, int value){
-
+    Node* ptr = root;
+    if(!contains(root, value)){ //contains?
+        return nullptr;
+    }
+    if(ptr->key < value){ //left
+        ptr = ptr->lPtr;
+        return findNode(ptr, value);
+    }else if(ptr->key > value){ //right
+        ptr = ptr->rPtr;
+        return findNode(ptr, value);
+    }else if(ptr->key == value){ //found node
+        return ptr;
+    }
 }
 
-int findMin(Node* root){
-
+int findMin(Node* node){
+    return findMinNode(node)->key;
 }
 
-int findMax(Node* root){
+Node* findMinNode(Node* node){
+    Node* ptr = node;
+    if(!ptr->lPtr){
+        return ptr;
+    }else{
+        ptr = ptr->lPtr;
+        return findMinNode(ptr);
+    }
+}
 
+int findMax(Node* node){
+    return findMaxNode(node)->key;
+}
+
+Node* findMaxNode(Node* node){
+    Node* ptr = node;
+    if(!ptr->rPtr){
+        return ptr;
+    }else{
+        ptr = ptr->rPtr;
+        return findMaxNode(ptr);
+    }
 }
 
 int main(){return 0;}
