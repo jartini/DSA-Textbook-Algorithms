@@ -45,19 +45,41 @@ bool contain(Node* root, int query){
             return false;
         }else{
             ptr = ptr->lPtr;
-            contain(ptr, query);
+            return contain(ptr, query);
         }
     }else if(ptr->key > query){ //right
         if(ptr->rPtr == nullptr){
             return false;
         }else{
             ptr = ptr->rPtr;
-            contain(ptr, query);
+            return contain(ptr, query);
         }
     }
 }
 
+bool remove(Node* root, int value){
+    if (!contain(root, value)){
+        return false;
+    }else{
+        
+    }
+}
 
+Node* findParentNode(Node* root, int value){
+
+}
+
+Node* findNode(Node* root, int value){
+
+}
+
+int findMin(Node* root){
+
+}
+
+int findMax(Node* root){
+    
+}
 
 
 
