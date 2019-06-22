@@ -21,10 +21,11 @@ bool contain(Node* root, int query){
     if(ptr->key == query){
         return true;
     }else{
-        if(ptr->key < query){ //left
+        if(query < ptr->key){ //left
             ptr = ptr->lPtr;
             return contain(ptr, query); 
-        }else if(ptr->key > query){ //right
+        }else if(query > ptr->key){ //right
+            ptr = ptr->rPtr;
             return contain(ptr, query);
         }
     }
@@ -68,11 +69,11 @@ Node* findParentNode(Node* root, int value, Node* parent = nullptr){
     if(!contain(root, value)){ //contains?
         return nullptr;
     }
-    if(ptr->key < value){//left
+    if(value < ptr->key){//left
         parent = ptr;
         ptr = ptr->lPtr;
         return findParentNode(ptr, value, parent);
-    }else if(ptr->key > value){ //right
+    }else if(value > ptr->key){ //right
         parent = ptr;
         ptr = ptr->rPtr;
         return findParentNode(ptr, value, parent);
@@ -87,10 +88,10 @@ Node* findNode(Node* root, int value){
     if(!contain(root, value)){ //contains?
         return nullptr;
     }
-    if(ptr->key < value){ //left
+    if(value < ptr->key){ //left
         ptr = ptr->lPtr;
         return findNode(ptr, value);
-    }else if(ptr->key > value){ //right
+    }else if(value > ptr->key){ //right
         ptr = ptr->rPtr;
         return findNode(ptr, value);
     }else if(ptr->key == value){ //found node
@@ -102,7 +103,7 @@ Node* findMinNode(Node* node){
     //returns pointer of min node
     Node* ptr = node;
     if(!ptr->lPtr){
-        return ptr;
+        return nullptr;
     }else{
         ptr = ptr->lPtr;
         return findMinNode(ptr);
@@ -119,7 +120,7 @@ Node* findMaxNode(Node* node){
     //returns pointer of max node
     Node* ptr = node;
     if(!ptr->rPtr){
-        return ptr;
+        return nullptr;
     }else{
         ptr = ptr->rPtr;
         return findMaxNode(ptr);
@@ -141,22 +142,40 @@ bool remove(Node* root, int value){
     }
     Node* parent = findParentNode(root, value);
     Node* node = findNode(root, value);
-    Node* infTree = node->lPtr;
+    Node* infTree = node->rPtr;
     Node* supTree = node->rPtr;
-    Node* infParent = findMinNode(supTree);
-    infParent->lPtr = infTree;
-    if(parent->lPtr == node){
-        parent->lPtr = supTree;
-    }else if(parent->rPtr == node){
-        parent->rPtr = supTree;
-    }else if(root->key == value){
-        root = supTree;
-        return true;
+    if(!supTree && !infTree){
+        //if both sub trees do not exist
+        if(node->key < parent->key){
+
+        }else{
+
+        }
+    }else if(!supTree){
+        //if superior tree does not exist
+                if(node->key < parent->key){
+
+        }else{
+            
+        }
+    }else if(!infTree){
+        //if inferior tree does not exist
+                if(node->key < parent->key){
+
+        }else{
+            
+        }
     }else{
-        return false;
+        //both sub trees exist
+                if(node->key < parent->key){
+
+        }else{
+            
+        }
     }
     delete node;
     return true;
+
 }
 
 //TRAVERSALS
@@ -178,14 +197,19 @@ void breadthFirst(Node* root){
 }
 
 int main(){
-    int i[] ={1,5,3,6,4,7};
+    int i[] ={1,4,5,20,13};
     Node* root = new Node;
-    root->key = 2;
-    std::cout << insertNode(root, 3) << std::endl;
-   // for(int x : i){
-   //     insertNode(root, x);
-   // }
-   // std::cout << contain(root, 3) << std::endl;
+    root->key = 10;
+    //std::cout << insertNode(root, 3) << std::endl;
+    //std::cout << contain(root, 3) << std::endl;
+    for(int x : i){
+        insertNode(root, x);
+        //std::cout << x << std::endl;
+    }
+    //std::cout << findMin(root) + findMax(root) << std::endl;
+    std::cout << contain(root, 5) << std::endl;
+    std::cout << remove(root, 5) << std::endl;
+    std::cout << contain(root, 5) << std::endl;
     
     return 0;
 }
