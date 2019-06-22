@@ -147,30 +147,32 @@ bool remove(Node* root, int value){
     if(!supTree && !infTree){
         //if both sub trees do not exist
         if(node->key < parent->key){
-
+            parent->lPtr = nullptr;
         }else{
-
+            parent->rPtr = nullptr;
         }
-    }else if(!supTree){
+    }else if(!supTree && infTree){
         //if superior tree does not exist
-                if(node->key < parent->key){
-
+        if(node->key < parent->key){
+            parent->lPtr = infTree;
         }else{
-            
+            parent->rPtr = infTree;
         }
-    }else if(!infTree){
+    }else if(!infTree && supTree){
         //if inferior tree does not exist
-                if(node->key < parent->key){
-
+        if(node->key < parent->key){
+            parent->lPtr = supTree;
         }else{
-            
+            parent->rPtr = supTree;
         }
     }else{
         //both sub trees exist
-                if(node->key < parent->key){
-
+        Node* infParent = findMinNode(supTree);
+        infParent->lPtr = infTree;
+       if(node->key < parent->key){
+           parent->lPtr = supTree;
         }else{
-            
+            parent->rPtr = supTree;
         }
     }
     delete node;
