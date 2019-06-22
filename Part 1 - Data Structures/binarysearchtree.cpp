@@ -1,16 +1,10 @@
 #include <iostream>
 
-
-
 struct Node {
     Node* lPtr = nullptr;
     Node* rPtr = nullptr;
     int key;
 };
-
-//not implementing insert(value) -> it is redundant
-//also I would rather pass a root node first. easier to program and test
-//void insert(int value){}
 
 bool contain(Node* root, int query){
     //searches the tree for an existing node with the corresponding key
@@ -31,6 +25,10 @@ bool contain(Node* root, int query){
     }
     
 }
+
+//not implementing insert(value) -> it is redundant
+//also I would rather pass a root node first. easier to program and test
+//!!!!void insert(int value){}
 
 bool insertNode(Node* root, int data){
     //inserts a node
@@ -115,7 +113,6 @@ int findMin(Node* node){
     return findMinNode(node)->key;
 }
 
-
 Node* findMaxNode(Node* node){
     //returns pointer of max node
     Node* ptr = node;
@@ -177,25 +174,42 @@ bool remove(Node* root, int value){
     }
     delete node;
     return true;
-
+    /*
+        Need to implement root node deletion case where address is allocated to combined suptree + inftree 
+     */
 }
 
 //TRAVERSALS
 
 void preorder(Node* root){
-
+    Node* ptr = root;
+    if(ptr){
+        std::cout << ptr->key << std::endl;
+        preorder(ptr->lPtr);
+        preorder(ptr->rPtr); 
+    }
 }
 
 void postorder(Node* root){
-
+    Node* ptr = root;
+    if(ptr){
+        postorder(ptr->lPtr);
+        postorder(ptr->rPtr); 
+        std::cout << ptr->key << std::endl;
+    }
 }
 
 void inorder(Node* root){
-
+    Node* ptr = root;
+    if(ptr){
+        inorder(ptr->lPtr);
+        std::cout << ptr->key << std::endl;
+        inorder(ptr->rPtr);
+    }
 }
 
 void breadthFirst(Node* root){
-    
+    //TO-DO
 }
 
 int main(){
@@ -209,9 +223,12 @@ int main(){
         //std::cout << x << std::endl;
     }
     //std::cout << findMin(root) + findMax(root) << std::endl;
-    std::cout << contain(root, 5) << std::endl;
+    /* std::cout << contain(root, 5) << std::endl;
     std::cout << remove(root, 5) << std::endl;
     std::cout << contain(root, 5) << std::endl;
-    
+    */
+    //preorder(root);
+    //postorder(root);
+    inorder(root);
     return 0;
 }
