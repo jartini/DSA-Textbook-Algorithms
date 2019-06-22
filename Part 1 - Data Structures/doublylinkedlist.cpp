@@ -5,7 +5,7 @@ struct  Node
 {
     Node* next = nullptr;
     Node* prev = nullptr;
-    int data = NULL;
+    int data;
 };
 
 Node* getLastPtr(Node* head){
@@ -68,4 +68,13 @@ void rtraverse(Node* head){
     }
 }
 
-int main(){return 0;}
+int main(){
+    Node* root = new Node;
+    root->data = 69;
+    for(int i = 0; i <= 5; i++){
+        insert(root, i);
+    }
+    remove(root, 4);
+    rtraverse(root);
+return 0;    
+}
